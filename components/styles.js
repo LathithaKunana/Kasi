@@ -12,14 +12,15 @@ export const Colors = {
     brand: "#000000",
     green: "#10B981",
     red: "#EF4444",
+    blue: "#297FFF"
 };
 
-const {primary, secondary,tertiary,darkLight,brand,green,red } = Colors;
+const {primary, secondary,tertiary,darkLight,brand,green,red, blue } = Colors;
 
 export const StyedContainer = styled.View`
     flex: 1;
     padding: 25px;
-    padding-top: ${StatusBarHeight + 30}px;
+    padding-top: ${StatusBarHeight + 50}px;
     background-color: ${primary}
 `;
 
@@ -62,7 +63,7 @@ export const StyledTextInput = styled.TextInput`
     font-size: 16px;
     height: 60px;
     margin-vertical: 3px;
-    marging-bottom: 10px;
+    margin-bottom: 10px;
     color: ${tertiary};
 `;
 
@@ -73,13 +74,13 @@ export const StyledInputlabel = styled.Text`
 `;
 
 export const LeftIcon = styled.View`
-    left: 15;
+    left: 15px;
     top: 38px;
     position: absolute;
     z-index: 1;
 `;
 export const RightIcon = styled.TouchableOpacity`
-    left: 15;
+    right: 15px;
     top: 38px;
     position: absolute;
     z-index: 1;
@@ -87,14 +88,60 @@ export const RightIcon = styled.TouchableOpacity`
 
 export const StyledButton = styled.TouchableOpacity`
     padding: 15px;
+    display:flex;
     background-color: ${brand};
     justify-content: center;
+    align-items: center;
     border-radius: 5px;
     margin-vertical: 5px;
     height: 60px;
+
+    ${(props) => props.google == true && `
+        background-color: ${green};
+        flex-direction: row;
+        justifyContent: center;
+        align-items: center;`
+    }
 `;
 
 export const ButtonText = styled.Text`
     color: ${primary};
     font-size: 16px;
+
+    ${(props) => props.google == true && `
+        margin-left: 10px`
+    }
+`;
+
+export const MsgBox = styled.Text`
+    text-align: center;
+    font-size: 13px;
+`;
+
+export const Line = styled.View`
+    height: 1px;
+    width: 100%;
+    background-color: ${darkLight};
+    margin-vertical: 10px;
+`;
+
+export const ExtraView =styled.View`
+    justify-contant: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+`;
+export const ExtraText =styled.Text`
+    justify-contant: center;
+    align-items: center;
+    color: ${tertiary};
+    font-size: 15px;
+`;
+export const TextLink =styled.TouchableOpacity`
+    justify-contant: center;
+    align-items: center;
+`;
+export const TextLinkContent =styled.Text`
+    color: ${blue};
+    font-size: 15px;
 `;
