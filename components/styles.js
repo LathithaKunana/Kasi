@@ -20,7 +20,7 @@ const {primary, secondary,tertiary,darkLight,brand,green,red, blue } = Colors;
 export const StyedContainer = styled.View`
     flex: 1;
     padding: 25px;
-    padding-top: ${StatusBarHeight + 50}px;
+    padding-top: ${StatusBarHeight + 60}px;
     background-color: ${primary}
 `;
 
@@ -30,9 +30,31 @@ export const InnerContainer = styled.View`
     align-items: center;
 `;
 
+export const WelcomeContainer =styled(InnerContainer)`
+    padding: 25px;
+    padding-top: 10px;
+    justify-content: center;
+`;
+
+export const Avatar =styled.Image`
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border-radius: 50px;
+    border-width: 2px;
+    border-color: ${secondary};
+    margin-bottom: 10px;
+    margin-top: 10px;
+`;
+
+export const WelcomeImage = styled.Image`
+    height: 50%;
+    min-width: 100%;
+`;
+
 export const PageLogo = styled.Image`
-    width: 250px;
-    height: 200px;
+    width: 200px;
+    height: 120px;
 `;
 
 export const PageTitle = styled.Text`
@@ -41,6 +63,10 @@ export const PageTitle = styled.Text`
     font-weight: bold;
     color: ${brand};
     padding: 10px;
+
+    ${(props) => props.welcome && `
+        font-size: 35px;
+    `}
 `;
 
 export const SubTitle = styled.Text`
@@ -49,6 +75,11 @@ export const SubTitle = styled.Text`
     font-weight: bold;
     color: ${tertiary};
     letter-spacing: 1px;
+
+    ${(props) => props.welcome && `
+        margin-bottom: 5px;
+        font-weight: normal;
+    `}
 `;
 export const StyledFormArea = styled.View`
     width: 90%;
@@ -126,19 +157,19 @@ export const Line = styled.View`
 `;
 
 export const ExtraView =styled.View`
-    justify-contant: center;
+    justify-content: center;
     flex-direction: row;
     align-items: center;
     padding: 10px;
 `;
 export const ExtraText =styled.Text`
-    justify-contant: center;
+    justify-content: center;
     align-items: center;
     color: ${tertiary};
     font-size: 15px;
 `;
 export const TextLink =styled.TouchableOpacity`
-    justify-contant: center;
+    justify-content: center;
     align-items: center;
 `;
 export const TextLinkContent =styled.Text`

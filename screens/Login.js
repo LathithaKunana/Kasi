@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, StatusBar } from "react-native";
 import { Formik } from "formik";
 import { View } from "react-native";
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
+import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
 import {
     StyedContainer,
@@ -26,14 +27,15 @@ import {
     TextLinkContent
 } from './../components/styles';
 
+
 const {brand, darkLight, primary} = Colors;
 
-const Login = () => {
+const Login = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
 
 
     return (
-        
+        <KeyboardAvoidingWrapper>
             <StyedContainer>
                
                 <StatusBar style = 'dark' />
@@ -44,9 +46,10 @@ const Login = () => {
                         <SubTitle>Account Login</SubTitle>
 
                         <Formik
-                            initialValues={{email: '' , password: ''}}
+                            initialValues={{fullName: '', email: '' , password: '', confirmPassword: ''}}
                             onSubmit={(values) => {
                                 console.log(values);
+                                navigation.navigate("Welcome");
                             }}
                         >{ ({handleChange, handleBlur, handleSubmit, values}) => (<StyledFormArea>
                         <MyTextInput
@@ -89,7 +92,7 @@ const Login = () => {
                         </StyledButton>
                         <ExtraView>
                             <ExtraText>Don't have an account already?</ExtraText>
-                            <TextLink>
+                            <TextLink onPress={() => navigation.navigate("Signup")}>
                                 <TextLinkContent>Signup</TextLinkContent>
                             </TextLink>
                         </ExtraView>
@@ -99,6 +102,7 @@ const Login = () => {
                     
                 </InnerContainer>
             </StyedContainer>
+        </KeyboardAvoidingWrapper>
     );
 };
 
