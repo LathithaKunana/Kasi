@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 import { KeyboardAvoidingView, StatusBar } from "react-native";
 import { Formik } from "formik";
-import { View } from "react-native";
+import { View , ActivityIndicator} from "react-native";
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
+
+//aoi client
+import axios from "axios";
 
 import {
     StyedContainer,
@@ -31,7 +34,39 @@ const {brand, darkLight, primary} = Colors;
 
 const Signup = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
+    const [message, setMessage] = useState();
+    const [messageType, setMessageType] = useState();
 
+
+    //form handling
+    const handleSignup = (credentials, setSubmitting ) => {
+        handleMessage(null)
+        const url = "https://login-server.up.railway.app/user/signup";
+
+        axios
+            .post(url, credentials)
+            .then((response) =>{
+                const result = response.data;
+                const {message, status, data} = result;
+
+                if(status !== 'SUCCESS') {
+                    handleMessage(message, status);
+                } else{
+                    navigation.navigate('Welcome', {...data});
+                }
+                setSubmitting(false)
+            })
+            .catch(error => {
+                console.log(error.JSON());
+                setSubmitting(false)
+                handleMessage("An error occurred check your natwork and try again");
+            })
+    }
+
+    const handleMessage = (message, type = 'FAILED') => {
+        setMessage(message);
+        setMessageType(type);
+    }
 
     return (
         <KeyboardAvoidingWrapper>
@@ -45,20 +80,31 @@ const Signup = ({navigation}) => {
                         <SubTitle>Account Signup</SubTitle>
 
                         <Formik
-                            initialValues={{email: '' , password: ''}}
-                            onSubmit={(values) => {
-                                console.log(values);
-                                navigation.navigate("Welcome");
+                            initialValues={{email: '' , password: '', name: '', confirmPassword : ''}}
+                            onSubmit={(values, {setSubmitting}) => {
+                                if(values.email == '' || 
+                                values.password == '' || 
+                                values.name == '' || 
+                                values.confirmPassword == '' 
+                                ) {
+                                    handleMessage('Please fil in all fields');
+                                    setSubmitting(false)
+                                   } else if(values.password !== values.confirmPassword) {
+                                    handleMessage('Password do not match');
+                                    setSubmitting(false)
+                                   }else {
+                                        handleSignup(values, setSubmitting)
+                                   }
                             }}
-                        >{ ({handleChange, handleBlur, handleSubmit, values}) => (<StyledFormArea>
+                        >{ ({handleChange, handleBlur, handleSubmit, values, isSubmitting}) => (<StyledFormArea>
                         <MyTextInput
                             label='Full Name'
                             icon = 'person'
                             placeholder = 'Your name'
                             placeholderTextColor = {darkLight}
-                            onChangeText= {handleChange('fullName')}
-                            onBlur= {handleBlur('fullName')}
-                            value= {values.fullName}
+                            onChangeText= {handleChange('name')}
+                            onBlur= {handleBlur('name')}
+                            value= {values.name}
                         />
 
                         <MyTextInput
@@ -93,28 +139,28 @@ const Signup = ({navigation}) => {
                             icon = 'lock'
                             placeholder = 'Enter your password'
                             placeholderTextColor = {darkLight}
-                            onChangeText= {handleChange('password')}
-                            onBlur= {handleBlur('password')}
-                            value= {values.confirmpassword}
+                            onChangeText= {handleChange('confirmPassword')}
+                            onBlur= {handleBlur('confirmPassword')}
+                            value= {values.confirmPassword}
                             secureTextEntry= {hidePassword}
                             isPassword={true}
                             hidePassword= {hidePassword}
                             setHidePassword= {setHidePassword}
                         />
-                        <MsgBox>...</MsgBox>
+                        <MsgBox type= {messageType}>{message}</MsgBox>
                         
-                        <StyledButton onPress={handleSubmit} >
+                        {!isSubmitting &&<StyledButton onPress={handleSubmit} >
                             <ButtonText>
                                 Signup
                             </ButtonText>
-                        </StyledButton>
+                        </StyledButton>}
+
+                        {isSubmitting &&<StyledButton disabled={true}>
+                            <ActivityIndicator size= "large" color={primary} />
+                        </StyledButton>}
+
                         <Line />
-                        {/*<StyledButton google={true} onPress={handleSubmit} >
-                            <Fontisto name="google" size={20} color={primary} />
-                            <ButtonText google={true}>
-                                Sign in with google
-                            </ButtonText>
-                        </StyledButton>*/}
+    
                         <ExtraView>
                             <ExtraText>Already have an account?</ExtraText>
                             <TextLink onPress={() => navigation.navigate("Login")}>

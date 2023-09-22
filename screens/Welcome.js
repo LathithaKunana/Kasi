@@ -16,8 +16,8 @@ import {
 
 
 
-const Welcome = ({navigation}) => {
-    
+const Welcome = ({navigation , route}) => {
+    const {name, email} = route.params;
 
     return (
         
@@ -27,7 +27,8 @@ const Welcome = ({navigation}) => {
                     <WelcomeImage resizeMode = 'cover' source = {require('./../assets/img2.png')}/>
                     <WelcomeContainer>
                         <PageTitle welcome = {true}>Welcome!</PageTitle>
-                        <SubTitle welcome = {true}>Lathitha Kunana</SubTitle>
+                        <SubTitle welcome = {true}>{name || "Lathitha Kunana"}</SubTitle>
+                        <SubTitle welcome = {true}>{email || "blahblaha@gail.com"}</SubTitle>
                         <StyledFormArea>
                             <Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} />
                                 <Line />
