@@ -8,9 +8,9 @@
     "userInterfaceStyle": "light",
     "scheme": "ekasiapp",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/ekasi-dark.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2D2D2D"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -21,9 +21,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#00000"
       }
     },
+    "plugin" : ["@react-native-google-signin/google-signin"],
     "web": {
       "favicon": "./assets/favicon.png"
     }

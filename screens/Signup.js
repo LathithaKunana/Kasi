@@ -5,6 +5,7 @@ import { View , ActivityIndicator} from "react-native";
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
+
 //aoi client
 import axios from "axios";
 

@@ -5,7 +5,7 @@ import { View, ActivityIndicator } from "react-native";
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 import axios from "axios";
-import  * as GoogleSignIn from 'expo-google-app-auth'
+import * as GoogleSignIn from "@react-native-google-signin/google-signin";
 import {
   StyedContainer,
   InnerContainer,
@@ -32,8 +32,6 @@ import {
 
 
 const { brand, darkLight, primary } = Colors;
-console.log(GoogleSignIn)
-
 
 const Login = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -71,18 +69,18 @@ const Login = ({ navigation }) => {
   };
 
   const getGoogleConfig = async () => {
-    const redirectPath = '/Kasi/Welcome'; // Specify your own redirect path
+
+    const redirectPath = "/Kasi/Welcome"; // Specify your own redirect path
     const redirectUrl = `${{ useProxy: true }}${redirectPath}`;
-  
-    const androidClientId = '680648998571-j2fsnki0op4ec3ri4uqab880tdj0r35k.apps.googleusercontent.com'; // Replace with your Android client ID
-    const iosClientId = '680648998571-nc6j5l4ptmakc52bquvetij0bb6uo2hi.apps.googleusercontent.com'; // Replace with your iOS client ID
-  
+
+    const androidClientId = "680648998571-j2fsnki0op4ec3ri4uqab880tdj0r35k.apps.googleusercontent.com"; // Replace with your Android client ID
+    const iosClientId = "680648998571-nc6j5l4ptmakc52bquvetij0bb6uo2hi.apps.googleusercontent.com"; // Replace with your iOS client ID
+    
     const config = {
-      clientId: Platform.OS === 'ios' ? iosClientId : androidClientId,
+      clientId: Platform.OS === "ios" ? iosClientId : androidClientId,
       redirectUrl: redirectUrl,
-      scopes: ['profile', 'email'],
+      scopes: ["profile", "email"],
     };
-  
     return config;
   };
   
@@ -90,27 +88,25 @@ const Login = ({ navigation }) => {
   const handleGoogleSignin = async () => {
     setGoogleSubmitting(true);
     try {
-      const config = await getGoogleConfig();
-      const result = await GoogleSignIn.logInAsync(config);
-  
-      if (result.type === 'success') {
+      await GoogleSignIn.configure(getGoogleConfig());
+      const result = await GoogleSignIn.signIn();
+      if (result.status === "success") {
         const { user } = result;
         const { email, name, photoUrl } = user;
-  
-        handleMessage('Google sign-in successful', 'SUCCESS');
-        setTimeout(() => navigation.navigate('Welcome', { email, name, photoUrl }), 2000);
+        console.log("Google sign-in successful");
+        console.log("Email:", email);
+        console.log("Name:", name);
+        console.log("Photo URL:", photoUrl);
+        
       } else {
-        console.error('Google sign-in error:', result);
-        handleMessage('An error occurred during Google sign-in');
+        console.error("Google sign-in error:", result);
       }
     } catch (error) {
-      console.error('Error during login:', error);
-      handleMessage('An error occurred. Check your network and try again');
+      console.error("Error during login:", error);
     } finally {
-      setGoogleSubmitting(false);
+      setIsSubmitting(false);
     }
-  };
-  
+}
   
 
   return (
