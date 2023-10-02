@@ -5,7 +5,8 @@ import { View, ActivityIndicator } from "react-native";
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 import axios from "axios";
-import * as GoogleSignIn from "@react-native-google-signin/google-signin";
+import * as GoogleSignIn from "expo-google-app-auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   StyedContainer,
   InnerContainer,
@@ -31,6 +32,8 @@ import {
 
 
 
+
+
 const { brand, darkLight, primary } = Colors;
 
 const Login = ({ navigation }) => {
@@ -50,6 +53,7 @@ const Login = ({ navigation }) => {
         const { message, status, data } = result;
 
         if (status !== "SUCCESS") {
+          AsyncStorage.setItem('keepLoggedIn', JSON.stringify(true))
           handleMessage(message, status);
         } else {
           navigation.navigate("Welcome", { ...data[0] });
@@ -88,25 +92,42 @@ const Login = ({ navigation }) => {
   const handleGoogleSignin = async () => {
     setGoogleSubmitting(true);
     try {
-      await GoogleSignIn.configure(getGoogleConfig());
-      const result = await GoogleSignIn.signIn();
-      if (result.status === "success") {
-        const { user } = result;
-        const { email, name, photoUrl } = user;
-        console.log("Google sign-in successful");
-        console.log("Email:", email);
-        console.log("Name:", name);
-        console.log("Photo URL:", photoUrl);
-        
-      } else {
-        console.error("Google sign-in error:", result);
-      }
+       await GoogleSignIn.a(getGoogleConfig());
+       const result = await GoogleSignIn.signIn();
+       if (result.status === "success") {
+         const { user } = result;
+         const { email, name, photoUrl } = user;
+         console.log("Google sign-in successful");
+         console.log("Email:", email);
+         console.log("Name:", name);
+         console.log("Photo URL:", photoUrl);
+   
+         // Send a request to your server with the user's information
+         const response = await fetch('https://login-server.up.railway.app/user/signin', {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+           },
+           body: JSON.stringify({ email, name, photoUrl }),
+         });
+   
+         // Check the response status and handle any errors
+         if (!response.ok) {
+           const errorData = await response.json();
+           console.log("Error:", errorData);
+           handleMessage("An error occurred while signing in with Google");
+         } else {
+           const data = await response.json();
+           navigation.navigate("Welcome", { ...data });
+         }
+       }
     } catch (error) {
-      console.error("Error during login:", error);
+       console.log(error);
+       handleMessage("An error occurred while signing in with Google");
     } finally {
-      setIsSubmitting(false);
+       setGoogleSubmitting(false);
     }
-}
+   };
   
 
   return (

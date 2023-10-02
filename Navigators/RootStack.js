@@ -11,9 +11,9 @@ const {primary, tertiary} = Colors;
 
 const Stack = createNativeStackNavigator();
 
-const RootStack = () => {
+const AuthStack = () => {
     return (
-        <NavigationContainer >
+        
             <Stack.Navigator
                 screenOptions={{
                     headerStyle: {
@@ -33,8 +33,35 @@ const RootStack = () => {
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen options={{headerTintColor: primary}} name="Welcome" component={Welcome} />
             </Stack.Navigator>
-        </NavigationContainer>
+        
+    )
+}
+const AppStack = () => {
+    return (
+        
+            <Stack.Navigator
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: 'transparent'
+                    },
+                    headerTintColor : tertiary,
+                    headerTransparent: true,
+                    headerTitle: '',
+                    headerLeftContainerStyle: {
+                        paddingLeft: 20
+                    },
+                }}
+                initialRouteName='Welcome'
+                
+            >
+                
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen options={{headerTintColor: primary}} name="Welcome" component={Welcome} />
+                
+            </Stack.Navigator>
+        
     )
 }
 
-export default RootStack;
+export {AuthStack, AppStack};

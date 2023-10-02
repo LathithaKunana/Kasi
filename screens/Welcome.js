@@ -17,22 +17,20 @@ import {
 
 
 const Welcome = ({navigation , route}) => {
-    const {name, email} = route.params;
+    const {name, email} = route;
 
     return (
         
             <>
                 <StatusBar style = 'light' />
+                {/**/}
                 <InnerContainer>
-                    <WelcomeImage resizeMode = 'cover' source = {require('./../assets/img2.png')}/>
                     <WelcomeContainer>
-                        <PageTitle welcome = {true}>Welcome!</PageTitle>
-                        <SubTitle welcome = {true}>{name || "Lathitha Kunana"}</SubTitle>
-                        <SubTitle welcome = {true}>{email || "blahblaha@gail.com"}</SubTitle>
                         <StyledFormArea>
                             <Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} />
                                 <Line />
                                 <StyledButton onPress={() =>{
+                                    A
                                     navigation.navigate("Login")
                                 }} >
                                     <ButtonText>
