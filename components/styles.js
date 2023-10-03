@@ -27,13 +27,13 @@ export const StyedContainer = styled.View`
 export const InnerContainer = styled.View`
     flex: 1;
     width: 100%;
-    align-items: center;
+    
 `;
 
 export const WelcomeContainer =styled(InnerContainer)`
     padding: 25px;
     padding-top: 10px;
-    justify-content: center;
+    justify-content: space-between;
 `;
 
 export const Avatar = styled.Image`
@@ -83,6 +83,7 @@ export const SubTitle = styled.Text`
 `;
 export const StyledFormArea = styled.View`
     width: 90%;
+    margin-bottom: 50px;
 `;
 
 export const StyledTextInput = styled.TextInput`

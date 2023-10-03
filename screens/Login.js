@@ -53,7 +53,8 @@ const Login = ({ navigation }) => {
         const { message, status, data } = result;
 
         if (status !== "SUCCESS") {
-          AsyncStorage.setItem('keepLoggedIn', JSON.stringify(true))
+          AsyncStorage.setItem('keepLoggedIn', JSON.stringify(true));
+
           handleMessage(message, status);
         } else {
           navigation.navigate("Welcome", { ...data[0] });

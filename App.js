@@ -8,9 +8,13 @@ export default function App() {
   const [isLogged, setIsLogged] = useState(null);
   const fetchData = async () => {
       try {
-        const userData = await AsyncStorage.getItem('keepLoggedIn');
-        console.log(userData)
+        
+        await AsyncStorage.clear();
 
+        AsyncStorage.setItem('keepLoggedIn', JSON.stringify(true));
+        
+        const userData = await AsyncStorage.getItem('keepLoggedIn');    
+        console.log(userData)
         setIsLogged(userData)
       } catch (error) {
         console.log('Error fetching data:', error);
@@ -24,7 +28,6 @@ export default function App() {
   <NavigationContainer>
     { isLogged? (<AppStack  />) : (<AuthStack />)}
   </NavigationContainer>
-    
  );
 }
 

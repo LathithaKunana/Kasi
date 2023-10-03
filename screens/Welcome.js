@@ -1,5 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, StatusBar } from "react-native";
+import { KeyboardAvoidingView, SafeAreaView, StatusBar } from "react-native";
 
 import {
     InnerContainer,
@@ -13,6 +13,8 @@ import {
     WelcomeImage,
     Avatar
 } from './../components/styles';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import HeaderTabs from "../components/HeaderTabs";
 
 
 
@@ -22,16 +24,18 @@ const Welcome = ({navigation , route}) => {
     return (
         
             <>
-                <StatusBar style = 'light' />
+                <StatusBar style = 'dark' />
                 {/**/}
+                <SafeAreaView />
                 <InnerContainer>
                     <WelcomeContainer>
+                        <HeaderTabs />
                         <StyledFormArea>
                             <Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} />
                                 <Line />
-                                <StyledButton onPress={() =>{
-                                    A
-                                    navigation.navigate("Login")
+                                <StyledButton onPress={ async () =>{
+                                    await AsyncStorage.setItem('keepLoggedIn', JSON.stringify(false))
+                                    await navigation.navigate("Login")
                                 }} >
                                     <ButtonText>
                                         Logout

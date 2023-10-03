@@ -29,9 +29,9 @@ const AuthStack = () => {
                 initialRouteName='Login'
                 
             >
-                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Login" component={Login}  />
                 <Stack.Screen name="Signup" component={Signup} />
-                <Stack.Screen options={{headerTintColor: primary}} name="Welcome" component={Welcome} />
+                <Stack.Screen options={{headerTintColor: primary, headerLeft: null}} name="Welcome" component={Welcome} />
             </Stack.Navigator>
         
     )
@@ -54,11 +54,9 @@ const AppStack = () => {
                 initialRouteName='Welcome'
                 
             >
-                
-                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Login" component={Login} options={{headerLeft: null}}/>
                 <Stack.Screen name="Signup" component={Signup} />
-                <Stack.Screen options={{headerTintColor: primary}} name="Welcome" component={Welcome} />
-                
+                <Stack.Screen options={{headerTintColor: primary,headerLeft: null}} name="Welcome" component={Welcome} />
             </Stack.Navigator>
         
     )
