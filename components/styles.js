@@ -21,13 +21,14 @@ export const StyedContainer = styled.View`
     flex: 1;
     padding: 25px;
     padding-top: ${StatusBarHeight + 60}px;
-    background-color: ${primary}
+    background-color: ${primary};
+    align-items: center
 `;
 
 export const InnerContainer = styled.View`
     flex: 1;
     width: 100%;
-    
+    align-items: center;
 `;
 
 export const WelcomeContainer =styled(InnerContainer)`
