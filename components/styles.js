@@ -30,7 +30,6 @@ export const InnerContainer = styled.View`
     padding-top:${Platform.OS === 'android'? 10:40};
     flex: 1;
     width: 100%;
-    align-items: center;
     background-color: ${primary};
 `;
 
@@ -90,9 +89,12 @@ export const SubTitle = styled.Text`
     `}
 `;
 export const StyledFormArea = styled.View`
+    margin-top: 100px;
     width: 90%;
     margin-bottom: 10px;
-    background-color: ${tertiary}
+    background-color: ${tertiary};
+    align-self: center;
+
 `;
 
 export const StyledTextInput = styled.TextInput`

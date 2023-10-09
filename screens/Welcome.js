@@ -15,7 +15,7 @@ import {
 } from './../components/styles';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeaderTabs from "../components/HeaderTabs";
-import { SearchBar } from "react-native-screens";
+import SearchBar from "../components/SearchBar";
 
 
 
@@ -29,11 +29,7 @@ const Welcome = ({navigation , route}) => {
                 {/**/}
                 
                 <InnerContainer >
-                <HeaderTabs />
-                <SearchBar />
-                    <WelcomeContainer>
-                        
-                        <SearchBar />
+                    <SearchBar />
                         <StyledFormArea>
                             <Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} />
                                 <Line />
@@ -46,7 +42,6 @@ const Welcome = ({navigation , route}) => {
                                     </ButtonText>
                                 </StyledButton>
                         </StyledFormArea> 
-                    </WelcomeContainer>
                 </InnerContainer>
                 
             </>
