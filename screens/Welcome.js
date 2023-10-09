@@ -1,5 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, SafeAreaView, StatusBar } from "react-native";
+import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 
 import {
     InnerContainer,
@@ -15,6 +15,7 @@ import {
 } from './../components/styles';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeaderTabs from "../components/HeaderTabs";
+import { SearchBar } from "react-native-screens";
 
 
 
@@ -26,16 +27,19 @@ const Welcome = ({navigation , route}) => {
             <>
                 <StatusBar style = 'dark' />
                 {/**/}
-                <SafeAreaView />
-                <InnerContainer>
+                
+                <InnerContainer >
+                <HeaderTabs />
+                <SearchBar />
                     <WelcomeContainer>
-                        <HeaderTabs />
+                        
+                        <SearchBar />
                         <StyledFormArea>
                             <Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} />
                                 <Line />
-                                <StyledButton onPress={ async () =>{
-                                    await AsyncStorage.setItem('keepLoggedIn', JSON.stringify(false))
-                                    await navigation.navigate("Login")
+                                <StyledButton onPress={ () => {
+                                     AsyncStorage.setItem('keepLoggedIn', JSON.stringify(false))
+                                     navigation.navigate("Login")
                                 }} >
                                     <ButtonText>
                                         Logout
@@ -44,9 +48,16 @@ const Welcome = ({navigation , route}) => {
                         </StyledFormArea> 
                     </WelcomeContainer>
                 </InnerContainer>
+                
             </>
     );
 };
+
+const styles = StyleSheet.create({
+    ios: {
+        paddingTop: Platform.OS === 'ios'? 40: 20
+    }
+})
 
 
 export default Welcome;

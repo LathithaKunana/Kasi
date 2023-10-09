@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import {AuthStack , AppStack} from './Navigators/RootStack'
 
+
 export default function App() {
   const [isLogged, setIsLogged] = useState(null);
   const fetchData = async () => {

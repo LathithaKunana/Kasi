@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { View, Text, Image, TextInput, TouchableOpacity} from "react-native";
+import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, Platform} from "react-native";
 import { Constants } from "expo-constants";
+
 
 const StatusBarHeight = '';
 
@@ -22,24 +23,29 @@ export const StyedContainer = styled.View`
     padding: 25px;
     padding-top: ${StatusBarHeight + 60}px;
     background-color: ${primary};
-    align-items: center
-`;
-
-export const InnerContainer = styled.View`
-    flex: 1;
-    width: 100%;
     align-items: center;
 `;
 
+export const InnerContainer = styled.View`
+    padding-top:${Platform.OS === 'android'? 10:40};
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    background-color: ${primary};
+`;
+
 export const WelcomeContainer =styled(InnerContainer)`
-    padding: 25px;
-    padding-top: 10px;
-    justify-content: space-between;
+    flex: 1;
+    padding: 5px;
+    padding-top: 150px;
+    margin-top: 70%;
+    justify-content: space-around;
+    background-color: ${secondary}
 `;
 
 export const Avatar = styled.Image`
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     margin: auto;
     border-radius: 50px;
     border-width: 2px;
@@ -51,6 +57,7 @@ export const Avatar = styled.Image`
 export const WelcomeImage = styled.Image`
     height: 50%;
     min-width: 100%;
+    
 `;
 
 export const PageLogo = styled.Image`
@@ -84,7 +91,8 @@ export const SubTitle = styled.Text`
 `;
 export const StyledFormArea = styled.View`
     width: 90%;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    background-color: ${tertiary}
 `;
 
 export const StyledTextInput = styled.TextInput`
