@@ -16,6 +16,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeaderTabs from "../components/HeaderTabs";
 import SearchBar from "../components/SearchBar";
+import Catergories from "../components/Catergories";
 
 
 
@@ -30,7 +31,8 @@ const Welcome = ({navigation , route}) => {
                 
                 <InnerContainer >
                     <SearchBar />
-                        <StyledFormArea>
+                    <Catergories />
+                        {/*<StyledFormArea>
                             <Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} />
                                 <Line />
                                 <StyledButton onPress={ () => {
@@ -41,7 +43,7 @@ const Welcome = ({navigation , route}) => {
                                         Logout
                                     </ButtonText>
                                 </StyledButton>
-                        </StyledFormArea> 
+                            </StyledFormArea> */}
                 </InnerContainer>
                 
             </>
