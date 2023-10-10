@@ -1,5 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet } from "react-native";
 
 import {
     InnerContainer,
@@ -17,6 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeaderTabs from "../components/HeaderTabs";
 import SearchBar from "../components/SearchBar";
 import Catergories from "../components/Catergories";
+import ResturantItem from "../components/ResturantItem";
 
 
 
@@ -31,19 +32,20 @@ const Welcome = ({navigation , route}) => {
                 
                 <InnerContainer >
                     <SearchBar />
-                    <Catergories />
-                        {/*<StyledFormArea>
-                            <Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} />
-                                <Line />
-                                <StyledButton onPress={ () => {
-                                     AsyncStorage.setItem('keepLoggedIn', JSON.stringify(false))
-                                     navigation.navigate("Login")
-                                }} >
-                                    <ButtonText>
-                                        Logout
-                                    </ButtonText>
-                                </StyledButton>
-                            </StyledFormArea> */}
+                        <Catergories />
+                        <ResturantItem />
+                            <StyledFormArea>
+                                {/*<Avatar resizeMode = 'cover' source = {require('./../assets/ekasi-dark.png')} /><Line />
+                                */}
+                                    <StyledButton onPress={ () => {
+                                        AsyncStorage.setItem('keepLoggedIn', JSON.stringify(false))
+                                        navigation.navigate("Login")
+                                    }} >
+                                        <ButtonText>
+                                            Logout
+                                        </ButtonText>
+                                    </StyledButton>
+                                </StyledFormArea>
                 </InnerContainer>
                 
             </>

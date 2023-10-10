@@ -30,7 +30,7 @@ export const InnerContainer = styled.View`
     padding-top:${Platform.OS === 'android'? 10:40};
     flex: 1;
     width: 100%;
-    background-color: ${primary};
+    background-color: '#eee';
 `;
 
 export const WelcomeContainer =styled(InnerContainer)`
@@ -62,6 +62,7 @@ export const WelcomeImage = styled.Image`
 export const PageLogo = styled.Image`
     width: 200px;
     height: 120px;
+    align-self: center
 `;
 
 export const PageTitle = styled.Text`
@@ -82,6 +83,7 @@ export const SubTitle = styled.Text`
     font-weight: bold;
     color: ${tertiary};
     letter-spacing: 1px;
+    text-align: center;
 
     ${(props) => props.welcome && `
         margin-bottom: 5px;
@@ -89,10 +91,10 @@ export const SubTitle = styled.Text`
     `}
 `;
 export const StyledFormArea = styled.View`
-    margin-top: 100px;
+    margin-top: 20px;
     width: 90%;
     margin-bottom: 10px;
-    background-color: ${tertiary};
+    background-color: ${primary};
     align-self: center;
 
 `;
@@ -130,14 +132,15 @@ export const RightIcon = styled.TouchableOpacity`
 `;
 
 export const StyledButton = styled.TouchableOpacity`
-    padding: 15px;
+
     display:flex;
     background-color: ${brand};
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
-    margin-vertical: 5px;
-    height: 60px;
+    border-radius: 80px;
+    margin-top: 10px;
+    
+    height: 30px;
 
     ${(props) => props.google == true && `
         background-color: ${green};

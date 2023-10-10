@@ -50,6 +50,7 @@ const AppStack = () => {
                     headerLeftContainerStyle: {
                         paddingLeft: 20
                     },
+                    
                 }}
                 initialRouteName='Welcome'
                 
